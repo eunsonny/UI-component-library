@@ -12,6 +12,4 @@ const OptionList = ({ children }: OptionListProps) => {
 		{children}
 	</ul>)
 }
-
-
 export default OptionList;

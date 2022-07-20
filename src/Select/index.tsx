@@ -1,38 +1,42 @@
-import React, { Fragment, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectContext } from "./selectContext";
 import useSelect from "./useSelect";
 
-
 type SelectProps = {
-	children: React.ReactNode;
-	value?: string | number | boolean;
-	propOption: any;
-	defaultValue: string | number | boolean;
-	label?: string;
-	onChange: Function;
-}
+  children: React.ReactNode;
+  value?: string | number | boolean;
+  defaultValue?: string | number | boolean;
+  onChange?: Function;
+};
 
-const Select = ({ children, propOption,  value, defaultValue, label, onChange }: SelectProps) => {
-	const [isOpen, setIsOpen] = useState(false);
-	// const { value, onValueChange } = useSelect();
-	const { selectedOption, open, setSelectedOption } = useSelect({ option: propOption, open: isOpen});
-	
+const Select = ({
+  children,
+  value,
+  defaultValue,
+  onChange,
+}: SelectProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { option, setOption, open } = useSelect({
+    propValue: value,
+		defaultValue,
+    open: isOpen,
+  });
+
   const onSelectedOption = (option: any) => {
-		setSelectedOption(option);
-		setIsOpen(false);
-	}	
-	
-	const context = { selectedOption, open, onSelectedOption };
-  return (<SelectContext.Provider value={context}>
-		<button onClick={() => setIsOpen(true)}>
-			<p>{selectedOption}</p>
-			{/* <p>{value}</p> */}
-		</button>
-		{isOpen && children}
-	</SelectContext.Provider>
-	);
-}
+    setOption(option);
+		onChange?.(option)
+    setIsOpen(false);
+  };
+
+  const context = { option, open, onSelectedOption };
+  return (
+    <SelectContext.Provider value={context}>
+      <button onClick={() => setIsOpen(true)}>
+        <p>{option}</p>
+      </button>
+      {isOpen && children}
+    </SelectContext.Provider>
+  );
+};
 
 export default Select;
-
-

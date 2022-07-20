@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-interface Props<T> {
+interface UseControlledProps<T> {
     controlled: T
-    default?: T
+    defaultValue?: T
 }
 
-const useControlled = <T>({ controlled, default: defaultProp,
-}: Props<T>) => {
+const useControlled = <T>({ controlled, defaultValue
+}: UseControlledProps<T>) => {
     const { current: isControlled } = React.useRef(controlled !== undefined);
-    const [valueState, setValueState] = React.useState(defaultProp);
+    const [valueState, setValueState] = React.useState(defaultValue);
     const value = isControlled ? controlled : valueState;
 
     const setValueIfUncontrolled = React.useCallback((newValue: T) => {

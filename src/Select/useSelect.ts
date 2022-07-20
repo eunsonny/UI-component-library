@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import useControlled from "../hooks/useControlled";
 
-function useSelect(props: any) {
-	const { option, open } = props;
-	const [selectedOption, setSelectedOption] = useControlled({ controlled:option })
-
+type Value = string | number | boolean;
+type UseSelectProps<TValue> = {
+	propValue?: TValue;
+	defaultValue?: TValue;
+	open: boolean;
+}
+function useSelect({ propValue, open, defaultValue }: UseSelectProps<Value>) {
+	const [value, setValue] = useControlled({ controlled:propValue, defaultValue })
 
 	return {
-		selectedOption,
-		open,
-		setSelectedOption
+    option: value, 
+		setOption: setValue,
+		open
 	}
 }
 
