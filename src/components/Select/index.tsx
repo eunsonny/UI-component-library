@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { SelectWrap, SelectButton } from "./Select.style";
 import { SelectContext } from "./selectContext";
 import useSelect from "./useSelect";
+
+
 
 type SelectProps = {
   children: React.ReactNode;
@@ -30,12 +33,14 @@ const Select = ({
 
   const context = { option, open, onSelectedOption };
   return (
-    <SelectContext.Provider value={context}>
-      <button onClick={() => setIsOpen(true)}>
-        <p>{option}</p>
-      </button>
-      {isOpen && children}
-    </SelectContext.Provider>
+    <SelectWrap>
+      <SelectButton onClick={() => setIsOpen(!isOpen)}>
+        <span>{option}</span>
+      </SelectButton>
+      <SelectContext.Provider value={context}>
+        {isOpen && children}
+      </SelectContext.Provider>
+    </SelectWrap>
   );
 };
 

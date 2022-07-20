@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { SelectOption } from '../Select/Select.style';
 import { SelectContext } from '../Select/selectContext';
 
 type OptionProps<TValue> = {
@@ -9,10 +10,13 @@ type OptionProps<TValue> = {
 const Option = ({ value, children }: OptionProps<string | number | boolean>) => {
 	const context = useContext(SelectContext);
 
-	console.log(context)
-
 	return (
-		<li onClick={() => context?.onSelectedOption(value)}>{children}</li>
+		<SelectOption 
+		  onClick={() => context?.onSelectedOption(value)}
+			isSelected={context?.option === value}
+			>
+			{children}
+		</SelectOption>
 	)
 }
 
