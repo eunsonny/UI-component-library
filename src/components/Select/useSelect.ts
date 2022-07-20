@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useControlled from "../hooks/useControlled";
+import useControlled from "../../hooks/useControlled";
 
 type Value = string | number | boolean;
 type UseSelectProps<TValue> = {

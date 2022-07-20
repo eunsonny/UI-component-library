@@ -5,5 +5,4 @@ export interface SelectContextType  {
 	option: any;
 	onSelectedOption: any;
 }
-
 export const SelectContext = React.createContext<SelectContextType | undefined>(undefined);

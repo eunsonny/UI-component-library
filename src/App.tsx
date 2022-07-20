@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import "./App.css";
-import Select from "./Select";
-import Option from "./Option";
-import OptionList from "./OptionList";
+import Select from "./components/Select";
+import Option from "./components/Option";
+import OptionList from "./components/OptionList";
 
 function App() {
   const [selectedOption, setSelectedOption] = useState('test');
