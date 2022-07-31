@@ -12,6 +12,8 @@ const Option: React.FC<OptionProps> = ({ data }) => {
 
 	return (
 		<SelectOption
+		  // data-testid={'selectOption'}
+			role={'selectOption'}
 			onClick={() => context?.onChangeOption(data)}
 			isSelected={context?.option?.value === data.value}
 		>

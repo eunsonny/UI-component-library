@@ -13,14 +13,14 @@ type SelectProps = {
 	placeholder?: string;
 };
 
-const Select = ({
+const Select: React.FC<SelectProps> = ({
 	children,
 	selectedOption,
 	defaultOption,
 	onChange,
 	disabled,
 	placeholder
-}: SelectProps) => {
+}) => {
 	const { isOpen, setIsOpen, option, onChangeOption, renderValue } = useSelect({
 		propOption: selectedOption,
 		defaultOption,
@@ -31,8 +31,8 @@ const Select = ({
 
 	const context = { option, isOpen, onChangeOption };
 	return (
-		<SelectWrap>
-			<SelectButton onClick={() => setIsOpen(!isOpen)}>
+		<SelectWrap role='selectContainer'>
+			<SelectButton onClick={() => setIsOpen(!isOpen)} role="selectButton">
 				{/* <span>{option?.label}</span> */}
 				<span>{renderValue}</span>
 			</SelectButton>
