@@ -1,23 +1,23 @@
 import React, { useContext } from 'react';
 import { SelectOption } from '../Select/Select.style';
 import { SelectContext } from '../Select/selectContext';
+import { OptionData } from './type';
 
-type OptionProps<TValue> = {
-	value: TValue,
-	children: React.ReactNode
+interface OptionProps {
+	data: OptionData;
 }
 
-const Option = ({ value, children }: OptionProps<string | number | boolean>) => {
+const Option: React.FC<OptionProps> = ({ data }) => {
 	const context = useContext(SelectContext);
 
 	return (
-		<SelectOption 
-		  onClick={() => context?.onSelectedOption(value)}
-			isSelected={context?.option === value}
-			>
-			{children}
+		<SelectOption
+			onClick={() => context?.onChangeOption(data)}
+			isSelected={context?.option?.value === data.value}
+		>
+			{data.label}
 		</SelectOption>
-	)
-}
+	);
+};
 
 export default Option;

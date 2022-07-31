@@ -1,47 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { SelectWrap, SelectButton } from "./Select.style";
-import { SelectContext } from "./selectContext";
-import useSelect from "./useSelect";
-
-
+import React from 'react';
+import type { OptionData } from '../Option/type';
+import { SelectWrap, SelectButton } from './Select.style';
+import { SelectContext } from './selectContext';
+import useSelect from './useSelect';
 
 type SelectProps = {
-  children: React.ReactNode;
-  value?: string | number | boolean;
-  defaultValue?: string | number | boolean;
-  onChange?: Function;
+	children: React.ReactNode;
+	selectedOption?: OptionData;
+	defaultOption?: OptionData;
+	onChange?: Function;
+	disabled?: boolean;
+	placeholder?: string;
 };
 
 const Select = ({
-  children,
-  value,
-  defaultValue,
-  onChange,
+	children,
+	selectedOption,
+	defaultOption,
+	onChange,
+	disabled,
+	placeholder
 }: SelectProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const { option, setOption, open } = useSelect({
-    propValue: value,
-		defaultValue,
-    open: isOpen,
-  });
+	const { isOpen, setIsOpen, option, onChangeOption, renderValue } = useSelect({
+		propOption: selectedOption,
+		defaultOption,
+		disabled,
+		placeholder,
+		onChange
+	});
 
-  const onSelectedOption = (option: any) => {
-    setOption(option);
-		onChange?.(option)
-    setIsOpen(false);
-  };
-
-  const context = { option, open, onSelectedOption };
-  return (
-    <SelectWrap>
-      <SelectButton onClick={() => setIsOpen(!isOpen)}>
-        <span>{option}</span>
-      </SelectButton>
-      <SelectContext.Provider value={context}>
-        {isOpen && children}
-      </SelectContext.Provider>
-    </SelectWrap>
-  );
+	const context = { option, isOpen, onChangeOption };
+	return (
+		<SelectWrap>
+			<SelectButton onClick={() => setIsOpen(!isOpen)}>
+				{/* <span>{option?.label}</span> */}
+				<span>{renderValue}</span>
+			</SelectButton>
+			<SelectContext.Provider value={context}>
+				{isOpen && children}
+			</SelectContext.Provider>
+		</SelectWrap>
+	);
 };
 
 export default Select;

@@ -1,8 +1,12 @@
 import * as React from 'react';
+import { OptionData } from '../Option/type';
 
-export interface SelectContextType  {
-	open: boolean;
-	option: any;
-	onSelectedOption: any;
+export interface SelectContextType {
+	isOpen: boolean;
+	option?: OptionData;
+	onChangeOption: Function
 }
-export const SelectContext = React.createContext<SelectContextType | undefined>(undefined);
+
+export const SelectContext = React.createContext<SelectContextType | undefined>(
+	undefined
+);
