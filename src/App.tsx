@@ -9,13 +9,13 @@ function App() {
 	return (
 		<div className="App">
 			<Select
-        disabled
+				disabled
 				selectedOption={selectedOption}
 				defaultOption={{ label: '하나', value: 1 }}
 				onChange={setSelectedOption}
 			>
 				<OptionList>
-          <Option data={{ label: '하나', value: 1 }} />
+					<Option data={{ label: '하나', value: 1 }} />
 					<Option data={{ label: '둘', value: 2 }} />
 					<Option data={{ label: '셋', value: 3 }} />
 				</OptionList>

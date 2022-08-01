@@ -38,7 +38,6 @@ const Select: React.FC<SelectProps> = ({
 						setIsOpen(!isOpen);
 					}
 				}}
-
 				data-testid="selectButton"
 			>
 				<span>{renderValue}</span>
