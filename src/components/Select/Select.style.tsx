@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const SelectWrap = styled.div<{disabled: boolean | undefined}>`
+export const SelectWrap = styled.div<{ disabled: boolean | undefined }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,12 +10,12 @@ export const SelectWrap = styled.div<{disabled: boolean | undefined}>`
   height: 30px;
   cursor: pointer;
 
-  ${({disabled}) => 
-    disabled && `
+  ${({ disabled }) =>
+    disabled &&
+    `
       background-color: grey;
       cursor: not-allowed;
-    `
-  }
+    `}
 `;
 
 export const SelectButton = styled.div`
@@ -35,14 +35,14 @@ export const SelectOptionList = styled.ul`
   background-color: #efefef;
 `;
 
-export const SelectOption = styled.li<{isSelected: boolean}>`
+export const SelectOption = styled.li<{ isSelected: boolean }>`
   cursor: pointer;
   width: 100%;
   height: 25px;
   list-style: none;
   text-align: center;
 
-  ${({isSelected}) =>
+  ${({ isSelected }) =>
     isSelected &&
     `
 		background-color: blue;

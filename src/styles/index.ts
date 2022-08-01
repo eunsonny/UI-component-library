@@ -1,3 +1,3 @@
-import ResetCss from './reset';
+import ResetCss from "./reset";
 
 export { ResetCss };
