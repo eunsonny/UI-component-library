@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface UseControlledProps<T> {
-	controlled?: T;
+	controlled: T;
 	defaultValue?: T;
 }
 
