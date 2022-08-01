@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SelectWrap = styled.div`
+export const SelectWrap = styled.div<{disabled: boolean | undefined}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,6 +9,13 @@ export const SelectWrap = styled.div`
   width: 200px;
   height: 30px;
   cursor: pointer;
+
+  ${({disabled}) => 
+    disabled && `
+      background-color: grey;
+      cursor: not-allowed;
+    `
+  }
 `;
 
 export const SelectButton = styled.div`

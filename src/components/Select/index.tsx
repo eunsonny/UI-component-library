@@ -19,21 +19,28 @@ const Select: React.FC<SelectProps> = ({
 	defaultOption,
 	onChange,
 	disabled,
-	placeholder
+	placeholder,
 }) => {
 	const { isOpen, setIsOpen, option, onChangeOption, renderValue } = useSelect({
 		propOption: selectedOption,
 		defaultOption,
 		disabled,
 		placeholder,
-		onChange
+		onChange,
 	});
 
 	const context = { option, isOpen, onChangeOption };
 	return (
-		<SelectWrap role='selectContainer'>
-			<SelectButton onClick={() => setIsOpen(!isOpen)} role="selectButton">
-				{/* <span>{option?.label}</span> */}
+		<SelectWrap data-testid="selectContainer" disabled={disabled}>
+			<SelectButton
+				onClick={() => {
+					if (!disabled) {
+						setIsOpen(!isOpen);
+					}
+				}}
+
+				data-testid="selectButton"
+			>
 				<span>{renderValue}</span>
 			</SelectButton>
 			<SelectContext.Provider value={context}>

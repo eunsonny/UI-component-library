@@ -12,7 +12,7 @@ const Option: React.FC<OptionProps> = ({ data }) => {
 
 	return (
 		<SelectOption
-			role={'selectOption'}
+			data-testid={'selectOption'}
 			onClick={() => context?.onChangeOption(data)}
 			isSelected={context?.option?.value === data.value}
 		>

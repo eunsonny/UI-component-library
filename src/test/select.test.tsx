@@ -17,7 +17,7 @@ describe('Select Component', () => {
 			</Select>
 		);
 
-		const select = screen.getByRole('selectButton');
+		const select = screen.getByTestId('selectButton');
 		expect(select).toHaveTextContent('선택');
 	});
 
@@ -32,7 +32,7 @@ describe('Select Component', () => {
 			</Select>
 		);
 
-		const select = screen.getByRole('selectButton');
+		const select = screen.getByTestId('selectButton');
 		expect(select).toHaveTextContent('값을 선택해 주세요.');
 	});
 
@@ -51,7 +51,7 @@ describe('Select Component', () => {
 			</Select>
 		);
 
-		const select = screen.getByRole('selectButton');
+		const select = screen.getByTestId('selectButton');
 		expect(select).toHaveTextContent('하나');
 	});
 
@@ -69,7 +69,7 @@ describe('Select Component', () => {
 			</Select>
 		);
 
-		const select = screen.getByRole('selectButton');
+		const select = screen.getByTestId('selectButton');
 		expect(select).toHaveTextContent('셋');
 	});
 
@@ -87,18 +87,14 @@ describe('Select Component', () => {
 			</Select>
 		);
 
-		const select = screen.getByRole('selectButton');
+		const select = screen.getByTestId('selectButton');
 		expect(select).toHaveTextContent('셋');
 	});
 
-	it('선택된 옵션 값이 있을 경우, 해당 값을 노출한다.', async () => {
+	it('option 컴포넌트의 갯수 만큼, 셀렉트 옵션의 값을 노출한다.', async () => {
 		const user = userEvent.setup();
 		render(
-			<Select
-				selectedOption={undefined}
-				// defaultOption={{ label: '하나', value: 1 }}
-				placeholder={'값을 선택해 주세요.'}
-			>
+			<Select selectedOption={undefined}>
 				<OptionList>
 					<Option data={{ label: '하나', value: 1 }} />
 					<Option data={{ label: '둘', value: 2 }} />
@@ -107,13 +103,26 @@ describe('Select Component', () => {
 			</Select>
 		);
 
-		const select = screen.getByRole('selectButton')
+		const select = screen.getByTestId('selectButton');
 		await user.click(select);
 
-		const options = screen.getAllByRole('selectOption');
-		console.log(options)
-		// expect(options[0]).toHaveTextContent('하나');
-		// expect(Number(options.length)).toHaveLength(3)
-		// console.log(options.length)
+		const options = screen.getAllByTestId('selectOption');
+		expect(options).toHaveLength(3);
+	});
+
+	it('disabled가 true일 경우, style={ backgroud-color: grey, cursor: not-allowed }가 적용된다.', async () => {
+		render(
+			<Select selectedOption={undefined} disabled={true}>
+				<OptionList>
+					<Option data={{ label: '하나', value: 1 }} />
+					<Option data={{ label: '둘', value: 2 }} />
+					<Option data={{ label: '셋', value: 3 }} />
+				</OptionList>
+			</Select>
+		);
+
+		const select = screen.getByTestId('selectContainer');
+		expect(select).toHaveStyle("background-color: grey");
+		expect(select).toHaveStyle("cursor: not-allowed");
 	});
 });

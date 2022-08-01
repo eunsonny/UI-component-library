@@ -9,6 +9,7 @@ function App() {
 	return (
 		<div className="App">
 			<Select
+        disabled
 				selectedOption={selectedOption}
 				defaultOption={{ label: '하나', value: 1 }}
 				onChange={setSelectedOption}

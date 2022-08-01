@@ -13,14 +13,4 @@ module.exports = {
       "^.+\\.(ts|tsx)$": "ts-jest"
     },
     "transformIgnorePatterns": ["./node_modules/"],
-    "moduleFileExtensions": [
-      "js",
-      "mjs",
-      "cjs",
-      "jsx",
-      "ts",
-      "tsx",
-      "json",
-      "node",
-    ],
   }
